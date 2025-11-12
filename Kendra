@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyan Kendra School - Student Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+        .class-section {
+            margin-bottom: 40px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .add-student-form {
+            background-color: #e9ecef;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select, button {
+            padding: 8px;
+            margin: 5px 0;
+            width: 100%;
+            max-width: 300px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            width: auto;
+            padding: 10px 20px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .success-message {
+            color: #28a745;
+            font-weight: bold;
+            margin-top: 10px;
+            display: none;
+        }
+        .error-message {
+            color: #dc3545;
+            font-weight: bold;
+            margin-top: 10px;
+            display: none;
+        }
+        .actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Gyan Kendra School</h1>
+        <p>Student Management System</p>
+    </header>
+    <div class="container">
+        <div class="add-student-form">
+            <h2>Add New Student</h2>
+            <form id="student-form">
+                <div class="form-group">
+                    <label for="student-name">Student Name:</label>
+                    <input type="text" id="student-name" required placeholder="Enter full name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="student-age">Age:</label>
+                    <input type="number" id="student-age" min="1" max="20" required placeholder="Enter age">
+                </div>
+                
+                <div class="form-group">
+                    <label for="student-address">Address:</label>
+                    <input type="text" id="student-address" required placeholder="Enter address">
+                </div>
+                
+                <div class="form-group">
+                    <label for="student-class">Class:</label>
+                    <select id="student-class" required>
+                        <option value="">Select Class</option>
+                        <option value="1">Class 1</option>
+                        <option value="2">Class 2</option>
+                        <option value="3">Class 3</option>
+                        <option value="4">Class 4</option>
+                        <option value="5">Class 5</option>
+                        <option value="6">Class 6</option>
+                        <option value="7">Class 7</option>
+                        <option value="8">Class 8</option>
+                    </select>
+                </div>
+                
+                <div class="actions">
+                    <button type="submit">Add Student</button>
+                    <button type="button" onclick="clearForm()">Clear Form</button>
+                </div>
+                
+                <div id="success-message" class="success-message">Student added successfully!</div>
+                <div id="error-message" class="error-message">Please fill in all fields correctly.</div>
+            </form>
+        </div>
+
+        <!-- Class sections remain the same as before -->
+        <div class="class-section" id="class-1">
+            <h2>Class 1</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+                <tbody id="class-1-body">
+                    <!-- Students will be added here -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="class-section" id="class-2">
+            <h2>Class 2</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+                <tbody id="class-2-body">
+                    <!-- Students will be added here -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="class-section" id="class-3">
+            <h2>Class 3</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+                <tbody id="class-3-body">
+                    <!-- Students will be added here -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="class-section" id="class-4">
+            <h2>Class 4</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+                <tbody id="class-4-body">
+                    <!-- Students will be added here -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="class-section" id="class-5">
+            <h2>Class 5</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+                <tbody id="class-5-body">
+                    <!-- Students will be added here -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="class-section" id="class-6">
+            <h2>Class 6</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+                <tbody id="class-6-body">
+                    <!-- Students will be added here -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="class-section" id="class-7">
+            <h2>Class 7</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+                <tbody id="class-7-body">
+                    <!-- Students will be added here -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="class-section" id="class-8">
+            <h2>Class 8</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+                <tbody id="class-8-body">
+                    <!-- Students will be added here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Function to add a student to the appropriate class table
+        function addStudent(name, age, address, classNum) {
+            const tbody = document.getElementById(`class-${classNum}-body`);
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${name}</td>
+                <td>${age}</td>
+                <td>${address}</td>
+            `;
+            tbody.appendChild(row);
+        }
+
+        // Function to clear the form
+        function clearForm() {
+            document.getElementById('student-form').reset();
+            hideMessages();
+        }
+
+        // Function to show success message
+        function showSuccess() {
+            const successMsg = document.getElementById('success-message');
+            successMsg.style.display = 'block';
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 3000); // Hide after 3 seconds
+        }
+
+        // Function to show error message
+        function showError() {
+            const errorMsg = document.getElementById('error-message');
+            errorMsg.style.display = 'block';
+            setTimeout(() => {
+                errorMsg.style.display = 'none';
+            }, 3000); // Hide after 3 seconds
+        }
+
+        // Function to hide messages
+        function hideMessages() {
+            document.getElementById('success-message').style.display = 'none';
+            document.getElementById('error-message').style.display = 'none';
+        }
+
+        // Handle form submission with validation
+        document.getElementById('student-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            hideMessages();
+
+            const name = document.getElementById('student-name').value.trim();
+            const age = parseInt(document.getElementById('student-age').value);
+            const address = document.getElementById('student-address').value.trim();
+            const classNum = document.getElementById('student-class').value;
+
+            // Validation
+            if (!name || !address || !classNum || isNaN(age) || age < 1 || age > 20) {
+                showError();
+                return;
+            }
+
+            // Add student
+            addStudent(name, age, address, classNum);
+            showSuccess();
+
+            // Clear the form
+            clearForm();
+        });
+    </script>
+</body>
+</html>
