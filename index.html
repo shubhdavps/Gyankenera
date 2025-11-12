@@ -80,6 +80,17 @@
         button:hover {
             background-color: #218838;
         }
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
         .success-message {
             color: #28a745;
             font-weight: bold;
@@ -157,6 +168,7 @@
                         <th>Name</th>
                         <th>Age</th>
                         <th>Address</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody id="class-1-body">
@@ -173,6 +185,7 @@
                         <th>Name</th>
                         <th>Age</th>
                         <th>Address</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody id="class-2-body">
@@ -189,6 +202,7 @@
                         <th>Name</th>
                         <th>Age</th>
                         <th>Address</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody id="class-3-body">
@@ -205,6 +219,7 @@
                         <th>Name</th>
                         <th>Age</th>
                         <th>Address</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody id="class-4-body">
@@ -221,6 +236,7 @@
                         <th>Name</th>
                         <th>Age</th>
                         <th>Address</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody id="class-5-body">
@@ -237,6 +253,7 @@
                         <th>Name</th>
                         <th>Age</th>
                         <th>Address</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody id="class-6-body">
@@ -253,6 +270,7 @@
                         <th>Name</th>
                         <th>Age</th>
                         <th>Address</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody id="class-7-body">
@@ -269,6 +287,7 @@
                         <th>Name</th>
                         <th>Age</th>
                         <th>Address</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody id="class-8-body">
@@ -279,16 +298,51 @@
     </div>
 
     <script>
+        // Array to hold all students
+        let students = [];
+
+        // Load students from localStorage on page load
+        window.addEventListener('load', function() {
+            const storedStudents = localStorage.getItem('students');
+            if (storedStudents) {
+                students = JSON.parse(storedStudents);
+                students.forEach(student => {
+                    addStudentToTable(student.name, student.age, student.address, student.classNum);
+                });
+            }
+        });
+
         // Function to add a student to the appropriate class table
-        function addStudent(name, age, address, classNum) {
+        function addStudentToTable(name, age, address, classNum) {
             const tbody = document.getElementById(`class-${classNum}-body`);
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${name}</td>
                 <td>${age}</td>
                 <td>${address}</td>
+                <td><button class="delete-btn" onclick="deleteStudent('${name}', ${age}, '${address}', ${classNum})">Delete</button></td>
             `;
             tbody.appendChild(row);
+        }
+
+        // Function to delete a student
+        function deleteStudent(name, age, address, classNum) {
+            // Remove from students array
+            students = students.filter(student => 
+                !(student.name === name && student.age === age && student.address === address && student.classNum === classNum)
+            );
+            // Update localStorage
+            localStorage.setItem('students', JSON.stringify(students));
+            // Remove from table
+            const tbody = document.getElementById(`class-${classNum}-body`);
+            const rows = tbody.querySelectorAll('tr');
+            rows.forEach(row => {
+                if (row.cells[0].textContent === name && 
+                    parseInt(row.cells[1].textContent) === age && 
+                    row.cells[2].textContent === address) {
+                    tbody.removeChild(row);
+                }
+            });
         }
 
         // Function to clear the form
@@ -337,8 +391,17 @@
                 return;
             }
 
-            // Add student
-            addStudent(name, age, address, classNum);
+            // Create student object
+            const student = { name, age, address, classNum: parseInt(classNum) };
+
+            // Add to students array
+            students.push(student);
+
+            // Save to localStorage
+            localStorage.setItem('students', JSON.stringify(students));
+
+            // Add to table
+            addStudentToTable(name, age, address, classNum);
             showSuccess();
 
             // Clear the form
